@@ -10,7 +10,74 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
   initRsvpForm();
   initPhoneMask();
+  initEventAddress();
 });
+
+const ADDRESS_STORAGE_KEY = 'cha-bebe-endereco';
+
+function mapsUrlFor(address) {
+  const trimmed = (address || '').trim();
+  if (!trimmed) return 'https://www.google.com/maps';
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(trimmed)}`;
+}
+
+function initEventAddress() {
+  const btn = document.getElementById('btn-escolher-endereco');
+  const input = document.getElementById('input-endereco');
+  const display = document.getElementById('endereco-exibido');
+  const mapLink = document.getElementById('map-link');
+  if (!btn || !input || !display || !mapLink) return;
+
+  const applyAddress = (value) => {
+    const address = (value || '').trim();
+    localStorage.setItem(ADDRESS_STORAGE_KEY, address);
+    mapLink.href = mapsUrlFor(address);
+
+    if (address) {
+      display.textContent = address;
+      display.classList.remove('hidden');
+      btn.classList.add('hidden');
+      input.classList.add('hidden');
+    } else {
+      display.textContent = '';
+      display.classList.add('hidden');
+      btn.classList.remove('hidden');
+      input.classList.add('hidden');
+    }
+  };
+
+  const startEdit = () => {
+    const current = localStorage.getItem(ADDRESS_STORAGE_KEY) || '';
+    btn.classList.add('hidden');
+    display.classList.add('hidden');
+    input.classList.remove('hidden');
+    input.value = current;
+    input.focus();
+  };
+
+  applyAddress(localStorage.getItem(ADDRESS_STORAGE_KEY) || '');
+
+  btn.addEventListener('click', startEdit);
+  display.addEventListener('click', startEdit);
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      input.blur();
+    }
+    if (e.key === 'Escape') {
+      input.value = localStorage.getItem(ADDRESS_STORAGE_KEY) || '';
+      input.blur();
+    }
+  });
+
+  input.addEventListener('blur', () => applyAddress(input.value));
+
+  mapLink.addEventListener('click', () => {
+    const address = (localStorage.getItem(ADDRESS_STORAGE_KEY) || '').trim();
+    mapLink.href = mapsUrlFor(address);
+  });
+}
 
 function initPhoneMask() {
   const tel = document.getElementById('telefone');

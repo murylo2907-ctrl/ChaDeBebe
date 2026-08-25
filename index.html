@@ -215,6 +215,24 @@
       border-color: #D4739A;
     }
 
+    .address-pick {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: #D4739A;
+      font-weight: 500;
+      font-size: inherit;
+      font-family: inherit;
+      line-height: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .address-pick:hover {
+      color: #E88FB1;
+    }
+
     .divider-rosa {
       height: 1px;
       background: linear-gradient(90deg, transparent, #F8C1D6, #E88FB1, #D4AF37, #E88FB1, #F8C1D6, transparent);
@@ -313,11 +331,13 @@
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
           <path d="M12 11.5c-.8 0-1.5.5-1.8 1.2l-.5 1.1 1.1.5.5-1.1c.1-.2.3-.3.5-.3.4 0 .7.3.7.7 0 .2-.1.4-.3.5l-1.1.5.5 1.1 1.1-.5c.7-.3 1.2-1 1.2-1.8 0-1.1-.9-2-2-2z" fill="#fff" opacity="0.9"/>
         </svg>
-        <p class="text-rosa-escuro font-medium text-sm sm:text-base leading-relaxed">
-          Rua Nova América 372 — Campo Comprido
-        </p>
-        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Nova+América+372+Campo+Comprido+Curitiba"
-           target="_blank" rel="noopener noreferrer"
+        <button type="button" id="btn-escolher-endereco" class="address-pick text-sm sm:text-base leading-relaxed">
+          Escolher o endereço
+        </button>
+        <input type="text" id="input-endereco" class="input-field hidden w-full max-w-sm rounded-xl px-4 py-3 text-sm text-center"
+               placeholder="Digite o endereço do evento" autocomplete="street-address" aria-label="Endereço do evento">
+        <p id="endereco-exibido" class="hidden text-rosa-escuro font-medium text-sm sm:text-base leading-relaxed cursor-pointer"></p>
+        <a id="map-link" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer"
            class="text-xs text-rosa-acento underline underline-offset-2 hover:text-rosa-escuro transition-colors mt-1">
           Ver no mapa
         </a>
