@@ -1,5 +1,5 @@
 /**
- * Convite Digital — Chá da Livia
+ * Convite Digital — Chá do Bebê
  * URL do Web App do Google Apps Script (termina em /exec)
  */
 const GAS_WEB_APP_URL =

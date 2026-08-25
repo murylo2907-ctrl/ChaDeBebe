@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * CHÁ DA LIVIA — Google Apps Script (RSVP → Google Sheets)
+ * CHÁ DO BEBÊ — Google Apps Script (RSVP → Google Sheets)
  * =============================================================================
  *
  * CONFIGURAÇÃO:
@@ -32,7 +32,7 @@ function doGet(e) {
     if (params.action === 'save' || params.nome) {
       return saveRsvp_(params);
     }
-    return jsonResponse_({ status: 'ok', message: 'Web App do Chá da Livia ativo.' });
+    return jsonResponse_({ status: 'ok', message: 'Web App do Chá do Bebê ativo.' });
   } catch (err) {
     return jsonResponse_({ success: false, message: String(err.message || err) });
   }
